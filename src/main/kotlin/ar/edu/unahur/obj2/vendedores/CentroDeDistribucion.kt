@@ -1,7 +1,7 @@
 package ar.edu.unahur.obj2.vendedores
 
 class CentroDeDistribucion ( val ciudad: Ciudad ) {
-    val vendedores = mutableListOf<Vendedor>()  //Preguntar por lista de varios objetos de distintos tipos.
+    val vendedores = mutableListOf<Vendedor>() 
 
     fun contratarVendedor(unVendedor: Vendedor) {
         check (vendedores.contains(unVendedor)) {
