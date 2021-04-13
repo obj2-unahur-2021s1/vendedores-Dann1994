@@ -21,6 +21,10 @@ abstract class Vendedor () {
   fun certificacionesDeProducto() = certificaciones.count { it.esDeProducto }
   fun otrasCertificaciones() = certificaciones.count { !it.esDeProducto }
   fun esGenerico() = this.otrasCertificaciones() >= 1
+
+  fun agragarCertificacion (unaCertificacion: Certificacion) {
+    certificaciones.add(unaCertificacion)
+  }
 }
 
 class VendedorFijo (val ciudadDeOrigen: Ciudad) : Vendedor() {
@@ -35,12 +39,12 @@ class Viajante (val provinciasHabilitadas: List<Provincia>) : Vendedor() {
 
   override fun esInfluyente() = provinciasHabilitadas.sumBy { it.poblacion } >= 10000000
 
-  override fun puedeTrabajarEn(ciudad: Ciudad):Boolean = provinciasHabilitadas.contains(ciudad.provincia)
+  override fun puedeTrabajarEn(ciudad: Ciudad) = provinciasHabilitadas.contains(ciudad.provincia)
 }
 
 class ComercioCorresponsal (val ciudades: List<Ciudad>) : Vendedor() {
 
   override fun esInfluyente() = ciudades.size >= 5 || (ciudades.map { it.provincia }.toSet()).size >= 3
 
-  override fun puedeTrabajarEn(ciudad: Ciudad):Boolean = ciudades.contains(ciudad)
+  override fun puedeTrabajarEn(ciudad: Ciudad) = ciudades.contains(ciudad)
 }
